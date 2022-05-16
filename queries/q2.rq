@@ -1,0 +1,7 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?s ?class
+WHERE {
+    ?s a ?class .
+    VALUES ?s { :drivers\/123456789 :results\/123456789 }
+}

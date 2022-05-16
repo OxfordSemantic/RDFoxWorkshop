@@ -1,0 +1,6 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:drivers a owl:Class .
+:people a owl:Class .
+
+:drivers rdfs:subClassOf :people .

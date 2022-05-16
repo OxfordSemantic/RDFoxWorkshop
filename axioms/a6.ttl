@@ -1,0 +1,8 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:results_driver a owl:ObjectProperty .
+
+:hasRacedIn owl:propertyChainAxiom (
+    [owl:inverseOf :results_driver]
+    :results_race
+) .

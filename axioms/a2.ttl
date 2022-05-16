@@ -1,0 +1,6 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:drivers a owl:Class .
+
+:drivers_forename a owl:DatatypeProperty;
+    rdfs:domain :drivers .

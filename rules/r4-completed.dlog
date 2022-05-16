@@ -1,0 +1,11 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# Count race wins
+
+[?driver, :hasRaceWinCount, ?raceWinCount] :-
+    AGGREGATE(
+        [?result, :results_driver, ?driver],
+        [?result, :results_positionOrder, 1] # Make sure the driver actually won 
+        ON ?driver
+        BIND COUNT(?result) AS ?raceWinCount
+    ) .

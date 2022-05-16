@@ -1,0 +1,6 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?class
+WHERE {
+    :drivers\/1 a ?class
+}

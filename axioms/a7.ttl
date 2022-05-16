@@ -1,0 +1,18 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:qualifying a owl:Class .
+
+:qualifying_position a owl:DatatypeProperty .
+
+:polePositionQualifying a owl:Class ;
+    owl:equivalentClass [ 
+        a owl:Class ;
+        owl:intersectionOf (
+            :qualifying
+            [
+                a owl:Restriction ;
+                owl:onProperty :qualifying_position ;
+                owl:hasValue "1"^^xsd:integer
+            ]
+        )
+    ] .

@@ -1,0 +1,6 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?p ?o
+WHERE {
+    :drivers\/123456789 ?p ?o
+}

@@ -1,0 +1,6 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?class
+WHERE {
+    :races\/123456789 a ?class
+}

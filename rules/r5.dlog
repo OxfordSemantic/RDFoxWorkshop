@@ -1,0 +1,10 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# Another very powerful feature of rules is *negation as failure*
+# Check if a driver has never been on the podium
+
+[?driver, a, :DriverWithoutPodiums] :-
+    [?driver, a, :drivers],
+    NOT EXISTS ?race IN (
+        [?driver, :hasPodiumInRace, ?race]
+    ) .

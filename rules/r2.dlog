@@ -1,0 +1,8 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# Check if a driver has reached the podium in a race
+[?driver, :hasPodiumInRace, ?race] :-
+    [?result, :results_race, ?race],
+    [?result, :results_driver, ?driver],
+    [?result, :results_positionOrder, ?positionOrder],
+    FILTER(?positionOrder < 4) .

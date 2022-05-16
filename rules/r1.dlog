@@ -1,0 +1,14 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# Find if a driver has been in a race (this is similar to axiom set 8)
+[?driver, :hasRacedIn, ?race] :-
+    [?result, :results_race, ?race],
+    [?result, :results_driver, ?driver] .
+
+# Note this looks like the following write query:
+#
+# INSERT {?driver :hasRacedIn ?race}
+# WHERE {
+#     ?result :results_race ?race ;
+#      :results_driver ?driver .
+# }

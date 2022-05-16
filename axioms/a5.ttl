@@ -1,0 +1,9 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:results_constructor a ___ .
+
+___ rdfs:subClassOf [
+    a ___ ;
+    ___ :results_constructor ;
+    owl:minCardinality ___
+] .

@@ -1,0 +1,12 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?s ?p ?o
+WHERE {
+    {
+        SELECT ?s
+        WHERE {
+            ?s a :polePositionQualifying
+        } LIMIT 1
+    }
+    ?s ?p ?o
+}

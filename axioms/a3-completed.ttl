@@ -1,0 +1,8 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+
+:results a owl:Class .
+:races a owl:Class .
+
+:results_race a owl:ObjectProperty ;
+    rdfs:domain :results ;
+    rdfs:range :races .

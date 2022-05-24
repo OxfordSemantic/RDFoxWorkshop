@@ -1,0 +1,9 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# What are the names of my drivers?
+SELECT DISTINCT ?driver ?forename ?surname
+WHERE {
+  ?driver a :driver ;
+          :driver_forename ?forename ;
+          :driver_surname ?surname .
+}

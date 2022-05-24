@@ -1,10 +1,30 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?forename ?surname ?count
+# Most races run without ever getting a podium
+SELECT ?forename ?surname ?raceCount
 WHERE {
-    ?driver :hasRaceCount ?count ;
-        :drivers_forename ?forename ;
-        :drivers_surname ?surname .
+# First, get all the drivers with their names.
+# The order of the query atoms is mostly not important, as RDFox will rearrange it
+# internally in order to have the best performance automatically.
+    ?driver a :driver ;
+        :driver_forename ?forename ;
+        :driver_surname ?surname .
+
+# Then make sure that they have never achieved a podium (i.e. positions 3, 2, or 1)
+    FILTER NOT EXISTS{
+        ?result2 :result_driver ?driver ;
+                :result_positionOrder ?positionOrder .
+        FILTER(?positionOrder IN(1, 2, 3))
+    }
+
+# Finally find out how many races they have raced in.
+# This is done in an 'inner query'
+    {SELECT ?driver (COUNT(?race) AS ?raceCount)
+    WHERE {
+        ?result :result_driver ?driver ;
+            :result_race ?race .
+    }
+    GROUP BY ?driver
+    }
 }
-ORDER BY DESC(?count)
-LIMIT 10
+ORDER BY DESC(?raceCount) # Don't forget to order

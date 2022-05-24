@@ -1,6 +1,8 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?class
+# This query matches all the triples,
+# and returns all the variables from the matched results
+SELECT ?S ?P ?O
 WHERE {
-    :drivers\/1 a ?class
+  ?S ?P ?O
 }

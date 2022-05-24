@@ -1,7 +1,7 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?s ?class
+# What kinds of edges are in the data
+SELECT DISTINCT ?P
 WHERE {
-    ?s a ?class .
-    VALUES ?s { :drivers\/123456789 :results\/123456789 }
+  ?S ?P ?O
 }

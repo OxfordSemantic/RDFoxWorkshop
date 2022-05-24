@@ -1,9 +1,0 @@
-@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
-
-:results_constructor a owl:ObjectProperty .
-
-:results rdfs:subClassOf [
-    a owl:Restriction ;
-    owl:onProperty :results_constructor ;
-    owl:minCardinality 1
-] .

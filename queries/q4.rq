@@ -1,6 +1,7 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?p ?o
+# What classes of nodes are there in the data?
+SELECT DISTINCT ?type
 WHERE {
-    :drivers\/123456789 ?p ?o
+  ?S a ?type
 }

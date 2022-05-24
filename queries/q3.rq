@@ -1,6 +1,7 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?class
+# What classes of nodes are there in the data?
+SELECT DISTINCT ?type
 WHERE {
-    :races\/123456789 a ?class
+  ?S a ?type
 }

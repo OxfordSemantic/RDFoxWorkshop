@@ -2,8 +2,8 @@ PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
 SELECT ?forename ?surname ?percentage
 WHERE {
-    ?driver :drivers_forename ?forename;
-        :drivers_surname ?surname;
+    ?driver :driver_forename ?forename;
+        :driver_surname ?surname;
         :hasWinPercentage ?percentage;
         :hasRaceCount ?count .
     FILTER(?count > 10)

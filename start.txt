@@ -1,0 +1,14 @@
+dstore create f1
+
+active f1
+
+import ./data/data.ttl
+
+set output out
+
+endpoint start
+
+prefix : <http://www.oxfordsemantic.tech/f1demo/>
+
+import > :myAxioms axioms/axioms.ttl
+importaxioms :myAxioms

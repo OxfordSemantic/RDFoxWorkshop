@@ -1,0 +1,52 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?S ?P ?O
+WHERE {
+  ?S ?P ?O
+  values ?S {
+  :driver_hamilton
+  :result_1
+  :qualifying_1
+  :race_18
+  :constructor_mclaren
+  :circuit_bahrain
+  }
+  FILTER (
+    ?P IN (	
+  a,
+  :driver_nationality,
+  :driver_dob,
+  :driver_surname,
+  :driver_forename,
+  :driver_number,
+  :driver_driverId,
+  :result_fastestLapTime,
+  :result_rank,
+  :result_fastestLap,
+  :result_time,
+  :result_points,
+  :result_positionOrder,
+  :result_grid,
+  :result_constructor,
+  :result_driver,
+  :result_race,
+  :result_resultId,
+  :qualifying_position,
+  :qualifying_constructor,
+  :qualifying_driver,
+  :qualifying_race,
+  :qualifying_qualifyId,
+  :race_time,
+  :race_date,
+  :race_name,
+  :race_circuit,
+  :race_raceId,
+  :constructor_nationality,
+  :constructor_name,
+  :constructor_constructorId,
+  :circuit_country,
+  :circuit_location,
+  :circuit_name,
+  :circuit_circuitId)
+  )
+} 

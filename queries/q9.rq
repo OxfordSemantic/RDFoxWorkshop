@@ -1,12 +1,17 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?forename ?surname ?race_name ?race_year
+# Drivers who never got a podium
+SELECT ?forename ?surname
 WHERE {
-    ?driver :hasPodiumInRace ?race ;
-        :drivers_forename ?forename ;
-        :drivers_surname ?surname .
+# First, get all the drivers with their names.
+    ?driver a :driver ;
+        :driver_forename ?forename ;
+        :driver_surname ?surname .
 
-    ?race :races_name ?race_name ;
-        :races_year ?race_year .
-}
-LIMIT 10
+# Then make sure that they have never achieved a podium (i.e. positions 3, 2, or 1)
+    FILTER NOT EXISTS{
+        ?result :result_driver ?driver ;
+                :result_positionOrder ?positionOrder .
+        FILTER(?positionOrder IN(1, 2, 3))
+        }
+    }

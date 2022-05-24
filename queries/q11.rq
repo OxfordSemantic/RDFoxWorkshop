@@ -1,11 +1,32 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?forename ?surname ?count ?winCount
+# Drivers with their win percentage, ordered by win percentage
+SELECT ?forename ?surname ?raceCount ?raceWins ?percentage
 WHERE {
-    ?driver :drivers_forename ?forename ;
-        :drivers_surname ?surname ;
-        :hasRaceCount ?count ;
-        :hasRaceWinCount ?winCount .
+# First get the drivers
+?driver :driver_forename ?forename ;
+        :driver_surname ?surname .
+
+# Then get the race count for each driver with an innery query...
+    {SELECT ?driver (COUNT(?race) AS ?raceCount)
+    WHERE {
+    ?result :result_driver ?driver ;
+            :result_race ?race .
+    }
+    GROUP BY ?driver}
+
+# ... and get the *win* count for each driver with another inner query.
+    {SELECT ?driver (COUNT(?race) AS ?raceWins)
+    WHERE {
+    ?result :result_driver ?driver ;
+            :result_race ?race ;
+            :result_positionOrder 1 .
+    }
+    GROUP BY ?driver}
+
+# Finally use the two aggregate variables to compute a percentage
+# with the BIND keyword.
+BIND(?raceWins/?raceCount AS ?percentage)
+
 }
-ORDER BY DESC(?winCount)
-LIMIT 10
+ORDER BY DESC(?percentage)

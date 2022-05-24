@@ -1,6 +1,10 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT (COUNT(?o) AS ?count)
+# Can you return everything about a specific driver, say Lewis Hamilton?
+SELECT ?driver ?p ?o
 WHERE {
-    ?s :hasRacedIn ?o
+  ?driver a :driver ;
+          :driver_forename "Lewis" ;
+          :driver_surname "Hamilton" ;
+          ?p ?o .
 }

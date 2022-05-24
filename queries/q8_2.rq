@@ -1,0 +1,32 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+# Drivers and list of their teammates
+SELECT ?forename ?surname (GROUP_CONCAT(DISTINCT ?teammateName; SEPARATOR="; ") AS ?teammatesList)
+WHERE {
+
+# Make sure the drivers drove for the same team AT the same race.
+# We want to avoid drivers who drove for the same team in two different periods:
+# -Lauda and Schumacher both drove for Ferrari, but in different periods
+# -Schumacher and Hamilton both drove in the same period (2010-12),
+# but in that period they drove for different teams.
+# They also drove for the same team, but never at the same time for the same team.
+
+  ?result1 :result_driver ?driver ;
+          :result_race ?race ; # same race
+          :result_constructor ?constructor . # same constructor
+  
+  ?result2 :result_driver ?teammate ;
+          :result_race ?race ; # same race
+          :result_constructor ?constructor . # same constructor
+
+  ?driver :driver_forename ?forename ;
+          :driver_surname ?surname .
+  
+  ?teammate :driver_forename ?tmForename ;
+          :driver_surname ?tmSurname .
+  
+  BIND(CONCAT(?forename, " ", ?surname) AS ?driverName)
+  BIND(CONCAT(?tmForename, " ", ?tmSurname) AS ?teammateName)
+  FILTER(?driver != ?teammate)
+}
+GROUP BY ?driver

@@ -1,0 +1,12 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?forename ?surname ?race_name ?race_year
+WHERE {
+    ?driver :hasRacedIn ?race ;
+        :driver_forename ?forename ;
+        :driver_surname ?surname .
+
+    ?race :race_name ?race_name ;
+        :race_year ?race_year .
+}
+LIMIT 10

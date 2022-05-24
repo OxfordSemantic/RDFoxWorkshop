@@ -1,12 +1,13 @@
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-SELECT ?s ?p ?o
+# Number of races Lewis Hamilton raced
+SELECT (COUNT(?race) AS ?raceCount)
 WHERE {
-    {
-        SELECT ?s
-        WHERE {
-            ?s a :polePositionQualifying
-        } LIMIT 1
-    }
-    ?s ?p ?o
+  
+  ?driver :driver_forename "Lewis" ;
+          :driver_surname "Hamilton" .
+          
+  ?result :result_driver ?driver ;
+          :result_race ?race .
+
 }

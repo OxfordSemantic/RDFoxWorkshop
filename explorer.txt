@@ -1,0 +1,23 @@
+Show the relations between the Schumachers
+http://localhost:12110/console/f1/explorer?query=PREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%20%0A%0ASELECT%20DISTINCT%20%3Fdriver%20%3FotherDriver%0AWHERE%20%7B%20%20%0A%20%20%3Fdriver%20%3Ahas_relative%20%3FotherDriver%20%3B%0A%20%20%20%20%20%20%20%20%20%20%3Adriver_fullName%20%3Fname%0A%20%20%0A%20%20%0A%20%20FILTER%28CONTAINS%28%3Fname%2C%20%22Schumacher%22%29%29%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D
+
+
+Show the relations between the Fittipaldis
+http://localhost:12110/console/f1/explorer?query=PREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%20%0A%0ASELECT%20DISTINCT%20%3Fdriver%20%3FotherDriver%0AWHERE%20%7B%20%20%0A%20%20%3Fdriver%20%3Ahas_relative%20%3FotherDriver%20%3B%0A%20%20%20%20%20%20%20%20%20%20%3Adriver_fullName%20%3Fname%0A%20%20%0A%20%20%0A%20%20FILTER%28CONTAINS%28%3Fname%2C%20%22Fittipaldi%22%29%29%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D
+
+
+Show Bottas's wins
+http://localhost:12110/console/f1/explorer?query=PREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%20%0A%0ASELECT%20DISTINCT%20*%0AWHERE%20%7B%0AVALUES%20%3Fdriver%20%7B%3Adriver_bottas%20%7D%0AVALUES%20%3Fpo%20%7B1%7D%0A%20%20%0A%20%3Fresult%20%3Aresult_driver%20%3Fdriver%20%3B%0A%20%20%20%20%20%20%20%20%20%3Aresult_race%20%3Frace%20%3B%0A%20%20%20%20%20%20%20%20%20%3Aresult_positionOrder%20%3Fpo%20.%0A%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D
+
+Show Bottas's wis *from pole*
+http://localhost:12110/console/f1/explorer?query=PREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%20%0A%0ASELECT%20DISTINCT%20*%0AWHERE%20%7B%0AVALUES%20%3Fdriver%20%7B%3Adriver_bottas%20%7D%0AVALUES%20%3Fpo%20%7B1%7D%0A%20%20%0A%20%3Fresult%20%3Aresult_driver%20%3Fdriver%20%3B%0A%20%20%20%20%20%20%20%20%20%3Aresult_race%20%3Frace%20%3B%0A%20%20%20%20%20%20%20%20%20%3Aresult_positionOrder%20%3Fpo%20.%0A%20%20%0A%20%3Fqualifying%20%3Aqualifying_driver%20%3Fdriver%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Aqualifying_race%20%3Frace%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Aqualifying_position%20%3Fpo%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D
+
+Has Prost raced at Adelaide?
+http://localhost:12110/console/f1/explorer?query=PREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%20%0A%0ASELECT%20DISTINCT%20*%0AWHERE%20%7B%0AVALUES%20%3Fdriver%20%7B%3Adriver_prost%7D%0AVALUES%20%3Fcircuit%20%7B%3Acircuit_adelaide%7D%0A%20%20%0A%20%3Fresult%20%3Aresult_driver%20%3Fdriver%20%3B%0A%20%20%20%20%20%20%20%20%20%3Aresult_race%20%3Frace%20.%0A%20%20%3Frace%20%3Arace_circuit%20%3Fcircuit%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D
+
+
+Go to fsearch to show you can't travel in all directions
+http://localhost:12110/console-extensions/fsearch/
+
+Are there any races with more than one winner
+?http://localhost:12110/console/f1/explorer?query=prefix%20%3A%20%3Chttp%3A%2F%2Fwww.oxfordsemantic.tech%2Ff1demo%2F%3E%0A%0ASELECT%20*%0AWHERE%20%7B%0A%20%20%3Fr1%20%3Aresult_driver%20%3Fd1%20%3B%0A%20%20%20%20%20%20%3Aresult_race%20%3Frace%20%3B%0A%20%20%20%20%20%20%3Aresult_positionOrder%201%20.%0A%20%20%0A%20%20%3Fr2%20%3Aresult_driver%20%3Fd2%20%3B%0A%20%20%20%20%20%20%3Aresult_race%20%3Frace%20%3B%0A%20%20%20%20%20%20%3Aresult_positionOrder%201%20.%0A%20%20%0A%20%20%3Frace%20%3Arace_name%20%3Fname%20%3B%0A%20%20%20%20%20%20%20%20%3Arace_year%20%3Fyr%20%3B%0A%20%20%20%20%20%20%20%20%3Arace_url%20%3Furl%0A%20%20FILTER(%3Fd1%20!%3D%20%3Fd2)%0A%7D%0A%20%20

@@ -1,2 +1,6 @@
 data/2021-22.ttl
 data/upTo2020.ttl
+data/data.ttl
+ExtractOntology
+Transformation
+.DS_Store

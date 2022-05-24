@@ -1,0 +1,566 @@
+@prefix : <http://www.oxfordsemantic.tech/f1demo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfox: <http://oxfordsemantic.tech/RDFox#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:driver_fullName a owl:DatatypeProperty ;
+    rdfs:domain :driver ;
+    rdfs:range xsd:string .
+
+:has_father a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_parent .
+
+:has_mother a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_parent .
+
+:has_parent a owl:ObjectProperty ;
+    owl:inverseOf :has_child ;
+    rdfs:subPropertyOf :has_relative .
+
+:has_child a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_relative .
+
+:has_sibling a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_relative .
+
+:has_uncle a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_relative ;
+    owl:propertyChainAxiom (
+    :has_parent
+    :has_sibling
+) ;
+    owl:inverseOf :has_nephew .
+
+:has_nephew a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has_relative .
+
+:has_relative a owl:ObjectProperty , owl:TransitiveProperty , owl:SymmetricProperty .
+
+#Win and pole using restrictions.
+:Win a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :result_positionOrder ;
+                owl:hasValue "1"^^xsd:integer
+    ] .
+
+:MaleDriver a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :driver_sex ;
+                owl:hasValue "Male"^^xsd:string
+    ] .
+
+:driver_sex a owl:DatatypeProperty ;
+    rdfs:domain :driver ;
+    rdfs:range xsd:string .
+
+:FemaleDriver a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :driver_sex ;
+                owl:hasValue "Female"^^xsd:string
+    ] .
+
+:Podium a owl:Class ;
+    owl:equivalentClass [
+                a owl:Class ;
+                owl:unionOf (
+                    [
+                    a owl:Restriction ;
+                    owl:onProperty :result_positionOrder ;
+                    owl:hasValue "1"^^xsd:integer
+                    ]
+                    [
+                    a owl:Restriction ;
+                    owl:onProperty :result_positionOrder ;
+                    owl:hasValue "2"^^xsd:integer
+                    ]
+                    [
+                    a owl:Restriction ;
+                    owl:onProperty :result_positionOrder ;
+                    owl:hasValue "3"^^xsd:integer
+                    ]
+                )
+            ] .
+
+:PolePosition a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :qualifying_position ;
+                owl:hasValue "1"^^xsd:integer
+    ] .
+
+
+#SomeValuesFrom, with equivalence, so some will not be RL
+:RaceWinner a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :driver_result ;
+                owl:someValuesFrom :Win
+    ] .
+
+:PoleSitter a owl:Class ;
+    owl:equivalentClass [
+                a owl:Restriction ;
+                owl:onProperty :driver_qualifying ;
+                owl:someValuesFrom :PolePosition
+    ] .
+
+:RaceWinnerAndPoleSitter a owl:Class ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :RaceWinner
+            :PoleSitter
+        )
+    ] . 
+
+
+
+
+
+#Propert Chain axiom. Notice that we can 
+:driver_race owl:propertyChainAxiom (
+    [owl:inverseOf :result_driver]
+    #Could have used :driver_result with no inverse
+    :result_race
+) .
+
+
+:circuit_country rdf:type owl:ObjectProperty ;
+    rdfs:domain :circuit ;
+    rdfs:range :country ;
+    owl:inverseOf :country_circuit .
+
+#Properties with domain, range, type and inverse. 
+:has_successoryCountry rdf:type owl:ObjectProperty ;
+    rdfs:domain :formerCountry ;
+    rdfs:range :country .
+
+:has_demonym rdf:type owl:DatatypeProperty ;
+    rdfs:domain :country ;
+    rdfs:range xsd:string .
+
+:driver_country rdf:type owl:ObjectProperty ;
+    rdfs:domain :driver ;
+    rdfs:range :country ;
+    owl:inverseOf :country_driver .
+
+#present day?
+#:driver_country
+
+:driver_continent rdf:type owl:ObjectProperty ;
+    owl:propertyChainAxiom (
+    :driver_country
+    :country_continent
+    );
+    rdfs:domain :driver ;
+    rdfs:range :continent .
+
+:continent_country rdf:type owl:ObjectProperty ;
+    rdfs:domain :continent ;
+    rdfs:range :country ;
+    owl:inverseOf :country_continent .
+
+
+#Properties with domain, range, type and inverse. 
+:circuit_url rdfs:range xsd:string ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_alt rdfs:range xsd:integer ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_lng rdfs:range xsd:decimal ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_lat rdfs:range xsd:decimal ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_country rdfs:range :country ;
+    rdfs:domain :circuit ;
+    rdf:type owl:ObjectProperty .
+
+:circuit_location rdfs:range xsd:string ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_name rdfs:range xsd:string ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_circuitRef rdfs:range xsd:string ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:circuit_circuitId rdfs:range xsd:integer ;
+    rdfs:domain :circuit ;
+    rdf:type owl:DatatypeProperty .
+
+:constructor_url rdfs:range xsd:string ;
+    rdfs:domain :constructor ;
+    rdf:type owl:DatatypeProperty .
+
+:constructor_nationality rdfs:range xsd:string ;
+    rdfs:domain :constructor ;
+    rdf:type owl:DatatypeProperty .
+
+:constructor_name rdfs:range xsd:string ;
+    rdfs:domain :constructor ;
+    rdf:type owl:DatatypeProperty .
+
+:constructor_constructorRef rdfs:range xsd:string ;
+    rdfs:domain :constructor ;
+    rdf:type owl:DatatypeProperty .
+
+:constructor_constructorId rdfs:range xsd:integer ;
+    rdfs:domain :constructor ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_url rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_nationality rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_dob rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_surname rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_forename rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_code rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_number rdfs:range xsd:integer ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_driverRef rdfs:range xsd:string ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:driver_driverId rdfs:range xsd:integer ;
+    rdfs:domain :driver ;
+    rdf:type owl:DatatypeProperty .
+
+:season_year rdfs:range xsd:integer ;
+    rdfs:domain :season ;
+    rdf:type owl:DatatypeProperty .
+
+:season_url rdfs:range xsd:string ;
+    rdfs:domain :season ;
+    rdf:type owl:DatatypeProperty .
+
+:race_year owl:inverseOf :season_race ;
+    rdfs:range :season ;
+    rdfs:domain :race ;
+    rdf:type owl:ObjectProperty .
+
+:race_circuit owl:inverseOf :circuit_race ;
+    rdfs:range :circuit ;
+    rdfs:domain :race ;
+    rdf:type owl:ObjectProperty .
+
+:race_raceId rdfs:range xsd:integer ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:race_round rdfs:range xsd:integer ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:race_name rdfs:range xsd:string ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:race_date rdfs:range xsd:string ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:race_time rdfs:range xsd:string ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:race_url rdfs:range xsd:string ;
+    rdfs:domain :race ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorResult_race owl:inverseOf :race_constructorResult ;
+    rdfs:range :race ;
+    rdfs:domain :constructorResult ;
+    rdf:type owl:ObjectProperty .
+
+:constructorResult_constructor owl:inverseOf :constructor_constructorResult ;
+    rdfs:range :constructor ;
+    rdfs:domain :constructorResult ;
+    rdf:type owl:ObjectProperty .
+
+:constructorResult_constructorResultsId rdfs:range xsd:integer ;
+    rdfs:domain :constructorResult ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorResult_points rdfs:range xsd:decimal ;
+    rdfs:domain :constructorResult ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorResult_status rdfs:range xsd:string ;
+    rdfs:domain :constructorResult ;
+    rdf:type owl:DatatypeProperty .
+
+:pitStop_race owl:inverseOf :race_pitStop ;
+    rdfs:range :race ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:ObjectProperty .
+
+:pitStop_driver owl:inverseOf :driver_pitStop ;
+    rdfs:range :driver ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:ObjectProperty .
+
+:pitStop_stop rdfs:range xsd:integer ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:DatatypeProperty .
+
+:pitStop_lap rdfs:range xsd:integer ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:DatatypeProperty .
+
+:pitStop_time rdfs:range xsd:string ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:DatatypeProperty .
+
+:pitStop_duration rdfs:range xsd:string ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:DatatypeProperty .
+
+:pitStop_milliseconds rdfs:range xsd:integer ;
+    rdfs:domain :pitStop ;
+    rdf:type owl:DatatypeProperty .
+
+:driverStanding_race owl:inverseOf :race_driverStanding ;
+    rdfs:range :race ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:ObjectProperty .
+
+:driverStanding_driver owl:inverseOf :driver_driverStanding ;
+    rdfs:range :driver ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:ObjectProperty .
+
+:driverStanding_driverStandingsId rdfs:range xsd:integer ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:driverStanding_points rdfs:range xsd:decimal ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:driverStanding_position rdfs:range xsd:integer ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:driverStanding_positionText rdfs:range xsd:string ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:driverStanding_wins rdfs:range xsd:integer ;
+    rdfs:domain :driverStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:result_race owl:inverseOf :race_result ;
+    rdfs:range :race ;
+    rdfs:domain :result ;
+    rdf:type owl:ObjectProperty .
+
+:result_driver owl:inverseOf :driver_result ;
+    rdfs:range :driver ;
+    rdfs:domain :result ;
+    rdf:type owl:ObjectProperty .
+
+:result_constructor owl:inverseOf :constructor_result ;
+    rdfs:range :constructor ;
+    rdfs:domain :result ;
+    rdf:type owl:ObjectProperty .
+
+:result_status owl:inverseOf :status_result ;
+    rdfs:range :status ;
+    rdfs:domain :result ;
+    rdf:type owl:ObjectProperty .
+
+:result_resultId rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_number rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_grid rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_position rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_positionText rdfs:range xsd:string ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_positionOrder rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_points rdfs:range xsd:decimal ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_laps rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_time rdfs:range xsd:string ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_milliseconds rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_fastestLap rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_rank rdfs:range xsd:integer ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_fastestLapTime rdfs:range xsd:string ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:result_fastestLapSpeed rdfs:range xsd:string ;
+    rdfs:domain :result ;
+    rdf:type owl:DatatypeProperty .
+
+:lapTime_race owl:inverseOf :race_lapTime ;
+    rdfs:range :race ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:ObjectProperty .
+
+:lapTime_driver owl:inverseOf :driver_lapTime ;
+    rdfs:range :driver ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:ObjectProperty .
+
+:lapTime_lap rdfs:range xsd:integer ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:DatatypeProperty .
+
+:lapTime_position rdfs:range xsd:integer ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:DatatypeProperty .
+
+:lapTime_time rdfs:range xsd:string ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:DatatypeProperty .
+
+:lapTime_milliseconds rdfs:range xsd:integer ;
+    rdfs:domain :lapTime ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorStanding_race owl:inverseOf :race_constructorStanding ;
+    rdfs:range :race ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:ObjectProperty .
+
+:constructorStanding_constructor owl:inverseOf :constructor_constructorStanding ;
+    rdfs:range :constructor ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:ObjectProperty .
+
+:constructorStanding_constructorStandingsId rdfs:range xsd:integer ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorStanding_points rdfs:range xsd:decimal ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorStanding_position rdfs:range xsd:integer ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorStanding_positionText rdfs:range xsd:string ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:constructorStanding_wins rdfs:range xsd:integer ;
+    rdfs:domain :constructorStanding ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_q3 rdfs:range xsd:string ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_q2 rdfs:range xsd:string ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_q1 rdfs:range xsd:string ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_position rdfs:range xsd:integer ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_number rdfs:range xsd:integer ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:qualifying_constructor owl:inverseOf :constructor_qualifying ;
+    rdfs:range :constructor ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:ObjectProperty .
+
+:qualifying_driver owl:inverseOf :driver_qualifying ;
+    rdfs:range :driver ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:ObjectProperty .
+
+:qualifying_race owl:inverseOf :race_qualifying ;
+    rdfs:range :race ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:ObjectProperty .
+
+:qualifying_qualifyId rdfs:range xsd:integer ;
+    rdfs:domain :qualifying ;
+    rdf:type owl:DatatypeProperty .
+
+:status_status rdfs:range xsd:string ;
+    rdfs:domain :status ;
+    rdf:type owl:DatatypeProperty .
+
+:status_statusId rdfs:range xsd:integer ;
+    rdfs:domain :status ;
+    rdf:type owl:DatatypeProperty .

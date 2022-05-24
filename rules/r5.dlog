@@ -4,7 +4,7 @@ PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 # Check if a driver has never been on the podium
 
 [?driver, a, :DriverWithoutPodiums] :-
-    [?driver, a, :drivers],
+    [?driver, a, :driver],
     NOT EXISTS ?race IN (
         [?driver, :hasPodiumInRace, ?race]
     ) .

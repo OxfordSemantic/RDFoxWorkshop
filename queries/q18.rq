@@ -1,0 +1,9 @@
+PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+
+SELECT ?forename ?surname
+WHERE {
+    ?driver a :DriverWithoutPodiums ;
+        :driver_forename ?forename ;
+        :driver_surname ?surname .
+}
+LIMIT 10

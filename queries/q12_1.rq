@@ -4,7 +4,6 @@ PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
 # We are returning a lot of drivers who have a high percentage because they only
 # competed in very few races.
-# We can use the HAVING keyword to restrict the drivers to those who have more than 5.
 
 SELECT ?driverName ?raceCount ?raceWinsFinal ?percentage
 WHERE {
@@ -18,20 +17,23 @@ WHERE {
     GROUP BY ?driver}
 
 # Then get the *win* count for each driver.
-OPTIONAL {SELECT ?driver (COUNT(?race) AS ?raceWins)
+OPTIONAL {
+    SELECT ?driver (COUNT(?race) AS ?raceWins)
     WHERE {
     ?result :result_driver ?driver ;
             :result_race ?race ;
             :result_positionOrder 1 .
     }
-    GROUP BY ?driver}
+    GROUP BY ?driver
+}
+
+FILTER(?raceWins >= 5)
 
 # Use the forename and surname to make the full name
 # This is not strictly necessary...
 ?driver :driver_forename ?forename ;
         :driver_surname ?surname .
 BIND(CONCAT(?forename, " ", ?surname) AS ?driverName)
-
 # Using the COALESCE keyword, we make sure that when the number of wins is undefined
 # it is 'bound' as 0.
 BIND(COALESCE(?raceWins,0) AS ?raceWinsFinal)

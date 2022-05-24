@@ -11,7 +11,7 @@ WHERE {
   :qualifying_1
   :race_18
   :constructor_mclaren
-  :circuit_bahrain
+  :circuit_albert_park
   }
   FILTER (
     ?P IN (	

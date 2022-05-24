@@ -8,10 +8,6 @@
 @prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:driver_fullName a owl:DatatypeProperty ;
-    rdfs:domain :driver ;
-    rdfs:range xsd:string .
-
 :has_father a owl:ObjectProperty ;
     rdfs:subPropertyOf :has_parent .
 
@@ -133,12 +129,17 @@
 ) .
 
 
+#Properties with domain, range, type and inverse. 
+
+:driver_fullName a owl:DatatypeProperty ;
+    rdfs:domain :driver ;
+    rdfs:range xsd:string .
+
 :circuit_country rdf:type owl:ObjectProperty ;
     rdfs:domain :circuit ;
     rdfs:range :country ;
     owl:inverseOf :country_circuit .
 
-#Properties with domain, range, type and inverse. 
 :has_successoryCountry rdf:type owl:ObjectProperty ;
     rdfs:domain :formerCountry ;
     rdfs:range :country .
@@ -151,9 +152,6 @@
     rdfs:domain :driver ;
     rdfs:range :country ;
     owl:inverseOf :country_driver .
-
-#present day?
-#:driver_country
 
 :driver_continent rdf:type owl:ObjectProperty ;
     owl:propertyChainAxiom (
@@ -231,10 +229,6 @@
     rdf:type owl:DatatypeProperty .
 
 :driver_nationality rdfs:range xsd:string ;
-    rdfs:domain :driver ;
-    rdf:type owl:DatatypeProperty .
-
-:driver_dob rdfs:range xsd:string ;
     rdfs:domain :driver ;
     rdf:type owl:DatatypeProperty .
 
@@ -391,10 +385,14 @@
     rdfs:domain :result ;
     rdf:type owl:ObjectProperty .
 
-:result_driver owl:inverseOf :driver_result ;
-    rdfs:range :driver ;
+:result_driver rdf:type owl:ObjectProperty ;
     rdfs:domain :result ;
-    rdf:type owl:ObjectProperty .
+    rdfs:range :driver ;
+    owl:inverseOf :driver_result .
+
+:driver_dob rdf:type owl:DatatypeProperty ;
+    rdfs:domain :driver ;
+    rdfs:range xsd:string .
 
 :result_constructor owl:inverseOf :constructor_result ;
     rdfs:range :constructor ;

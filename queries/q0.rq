@@ -13,7 +13,7 @@ WHERE {
   }
   FILTER (
     ?P IN (	
-  a,
+  rdf:type,
   :driver_nationality,
   :driver_dob,
   :driver_surname,

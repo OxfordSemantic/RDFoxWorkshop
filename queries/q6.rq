@@ -1,3 +1,4 @@
+#Query 6
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
 # Can you return everything about a specific driver, say Lewis Hamilton?

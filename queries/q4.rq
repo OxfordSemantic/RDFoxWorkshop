@@ -1,8 +1,9 @@
 #Query 4
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-# What classes of nodes are there in the data?
-SELECT DISTINCT ?type
+# What edges are there specifically for drivers?
+SELECT DISTINCT ?p
 WHERE {
-  ?S a ?type
+  ?S a :driver ;
+    ?p ?o .
 }

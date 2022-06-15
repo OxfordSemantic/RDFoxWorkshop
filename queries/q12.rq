@@ -1,12 +1,6 @@
 #Query 12
 PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
 
-# Can you spot another problem?
-
-# We are returning a lot of drivers who have a high percentage because they only
-# competed in very few races.
-# We can use the HAVING keyword to restrict the drivers to those who have more than 5.
-
 SELECT ?driverName ?raceCount ?raceWinsFinal ?percentage
 WHERE {
 

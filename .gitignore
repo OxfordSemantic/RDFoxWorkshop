@@ -4,3 +4,5 @@ data/data.ttl
 ExtractOntology
 Transformation
 .DS_Store
+RDFox-*
+*.lic

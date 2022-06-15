@@ -1,13 +1,13 @@
 [?lapTime, a, :FastestLapTime],
 [?driver, :hasFastestLapInRace, ?race] :-
     [?lapTime, a, :lapTime],
-    [?lapTime, :time, ?fastestTime],
-    [?lapTime, :race, ?race],
-    [?lapTime, :driver, ?driver],
+    [?lapTime, :lapTime_time, ?fastestTime],
+    [?lapTime, :lapTime_race, ?race],
+    [?lapTime, :lapTime_driver, ?driver],
     AGGREGATE (
         [?lapTime, a, :lapTime],
-        [?lapTime, :time, ?time],
-        [?lapTime, :race, ?race]
+        [?lapTime, :lapTime_time, ?time],
+        [?lapTime, :lapTime_race, ?race]
         ON ?race
         BIND MIN(?time) AS ?fastestTime
     ) .

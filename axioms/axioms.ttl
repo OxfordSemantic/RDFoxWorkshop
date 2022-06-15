@@ -27,9 +27,9 @@
 :has_uncle a owl:ObjectProperty ;
     rdfs:subPropertyOf :has_relative ;
     owl:propertyChainAxiom (
-    :has_parent
-    :has_sibling
-) ;
+        :has_parent
+        :has_sibling
+    ) ;
     owl:inverseOf :has_nephew .
 
 :has_nephew a owl:ObjectProperty ;
@@ -51,10 +51,6 @@
                 owl:onProperty :driver_sex ;
                 owl:hasValue "Male"^^xsd:string
     ] .
-
-:driver_sex a owl:DatatypeProperty ;
-    rdfs:domain :driver ;
-    rdfs:range xsd:string .
 
 :FemaleDriver a owl:Class ;
     owl:equivalentClass [
@@ -132,6 +128,10 @@
 #Properties with domain, range, type and inverse. 
 
 :driver_fullName a owl:DatatypeProperty ;
+    rdfs:domain :driver ;
+    rdfs:range xsd:string .
+
+:driver_sex a owl:DatatypeProperty ;
     rdfs:domain :driver ;
     rdfs:range xsd:string .
 

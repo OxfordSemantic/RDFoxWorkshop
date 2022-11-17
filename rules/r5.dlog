@@ -1,4 +1,4 @@
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Another very powerful feature of rules is *negation as failure*
 # Check if a driver has never been on the podium

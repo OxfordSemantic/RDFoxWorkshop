@@ -8,7 +8,7 @@ set output out
 
 endpoint start
 
-prefix : <http://www.oxfordsemantic.tech/f1demo/>
+prefix : <https://rdfox.com/examples/f1/>
 
 import > :myAxioms axioms/axioms.ttl
 importaxioms :myAxioms

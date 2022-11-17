@@ -1,5 +1,5 @@
 #Query 9
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Drivers who never got a podium
 SELECT ?forename ?surname

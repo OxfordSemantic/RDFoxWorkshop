@@ -1,5 +1,5 @@
 #Query 12
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 SELECT ?driverName ?raceCount ?raceWinsFinal ?percentage
 WHERE {

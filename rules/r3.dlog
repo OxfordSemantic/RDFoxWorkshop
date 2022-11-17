@@ -1,4 +1,4 @@
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Rules offer many advanced features
 # E.g. aggregation

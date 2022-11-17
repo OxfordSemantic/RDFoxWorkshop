@@ -1,5 +1,5 @@
 #Query 10
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Most races run without ever getting a podium
 SELECT ?forename ?surname ?raceCount

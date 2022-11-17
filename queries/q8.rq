@@ -1,5 +1,5 @@
 #Query 8
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Number of races per driver, ordered
 SELECT ?driver (COUNT(?race) AS ?raceCount)

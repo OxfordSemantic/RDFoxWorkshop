@@ -1,5 +1,5 @@
 #Query 4
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # What edges are there specifically for drivers?
 SELECT DISTINCT ?p

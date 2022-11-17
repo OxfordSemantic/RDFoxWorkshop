@@ -1,5 +1,5 @@
 #Query 7
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Number of races Lewis Hamilton raced
 SELECT (COUNT(?race) AS ?raceCount)

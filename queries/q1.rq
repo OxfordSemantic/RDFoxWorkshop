@@ -1,5 +1,5 @@
 #Query 1
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # This query matches all the triples,
 # and returns all the variables from the matched results

@@ -1,5 +1,5 @@
 #Query 15
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 SELECT ?forename ?surname ?race_name ?race_year
 WHERE {

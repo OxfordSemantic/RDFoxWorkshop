@@ -1,5 +1,5 @@
 #Query 6
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Can you return everything about a specific driver, say Lewis Hamilton?
 SELECT ?driver ?p ?o

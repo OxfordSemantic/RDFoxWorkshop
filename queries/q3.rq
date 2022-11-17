@@ -1,5 +1,5 @@
 #Query 3
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # What classes of nodes are there in the data?
 SELECT DISTINCT ?type

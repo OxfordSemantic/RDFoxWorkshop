@@ -1,5 +1,5 @@
 #Query 8, Bonus 2
-PREFIX : <http://www.oxfordsemantic.tech/f1demo/>
+PREFIX : <https://rdfox.com/examples/f1/>
 
 # Drivers and list of their teammates
 SELECT ?forename ?surname (GROUP_CONCAT(DISTINCT ?teammateName; SEPARATOR="; ") AS ?teammatesList)

@@ -1,16 +1,15 @@
-#Query 8, Bonus 2
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 8, Bonus 2
 
-# Drivers and list of their teammates
+# Drivers and lists of their teammates
 SELECT ?forename ?surname (GROUP_CONCAT(DISTINCT ?teammateName; SEPARATOR="; ") AS ?teammatesList)
 WHERE {
 
 # Make sure the drivers drove for the same team AT the same race.
 # We want to avoid drivers who drove for the same team in two different periods:
-# -Lauda and Schumacher both drove for Ferrari, but in different periods
-# -Schumacher and Hamilton both drove in the same period (2010-12),
-# but in that period they drove for different teams.
-# They also drove for the same team, but never at the same time for the same team.
+# - Lauda and Schumacher both drove for Ferrari, but in different periods
+# - Schumacher and Hamilton both drove in the same period (2010-12),
+#   but in that period they drove for different teams.
+#   They also drove for the same team, but never at the same time for the same team.
 
   ?result1 :result_driver ?driver ;
           :result_race ?race ; # same race

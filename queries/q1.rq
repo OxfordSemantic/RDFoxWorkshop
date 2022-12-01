@@ -1,5 +1,4 @@
-#Query 1
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 1
 
 # This query matches all the triples,
 # and returns all the variables from the matched results

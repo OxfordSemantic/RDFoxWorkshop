@@ -1,5 +1,4 @@
-#Query 15
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 15
 
 SELECT ?forename ?surname ?race_name ?race_year
 WHERE {

@@ -1,37 +1,38 @@
-#Query 12
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 12
 
 SELECT ?driverName ?raceCount ?raceWinsFinal ?percentage
 WHERE {
-
 # First get the race count for each driver.
-    {SELECT ?driver (COUNT(?race) AS ?raceCount)
-    WHERE {
-    ?result :result_driver ?driver ;
-            :result_race ?race .
+    {
+        SELECT ?driver (COUNT(?race) AS ?raceCount)
+        WHERE {
+            ?result :result_driver ?driver ;
+                :result_race ?race .
+        }
+        GROUP BY ?driver
     }
-    GROUP BY ?driver}
 
 # Then get the *win* count for each driver.
-OPTIONAL {SELECT ?driver (COUNT(?race) AS ?raceWins)
-    WHERE {
-    ?result :result_driver ?driver ;
-            :result_race ?race ;
-            :result_positionOrder 1 .
+    OPTIONAL {
+        SELECT ?driver (COUNT(?race) AS ?raceWins)
+        WHERE {
+            ?result :result_driver ?driver ;
+                :result_race ?race ;
+                :result_positionOrder 1 .
+        }
+        GROUP BY ?driver
     }
-    GROUP BY ?driver}
 
 # Use the forename and surname to make the full name
 # This is not strictly necessary...
-?driver :driver_forename ?forename ;
+    ?driver :driver_forename ?forename ;
         :driver_surname ?surname .
-BIND(CONCAT(?forename, " ", ?surname) AS ?driverName)
+    BIND(CONCAT(?forename, " ", ?surname) AS ?driverName)
 
 # Using the COALESCE keyword, we make sure that when the number of wins is undefined
-# it is 'bound' as 0.
-BIND(COALESCE(?raceWins,0) AS ?raceWinsFinal)
+# it is 'bound' as 0
+    BIND(COALESCE(?raceWins, 0) AS ?raceWinsFinal)
 # And use the two aggregatee variables to compute a percentage
-BIND(?raceWinsFinal/?raceCount AS ?percentage)
-
+    BIND(?raceWinsFinal/?raceCount AS ?percentage)
 }
 ORDER BY DESC(?percentage)

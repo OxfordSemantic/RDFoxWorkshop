@@ -1,18 +1,17 @@
-#Query 9
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 9
 
 # Drivers who never got a podium
 SELECT ?forename ?surname
 WHERE {
-# First, get all the drivers with their names.
+# First, get all the drivers with their names
     ?driver a :driver ;
         :driver_forename ?forename ;
         :driver_surname ?surname .
 
 # Then make sure that they have never achieved a podium (i.e. positions 3, 2, or 1)
-    FILTER NOT EXISTS{
+    FILTER NOT EXISTS {
         ?result :result_driver ?driver ;
-                :result_positionOrder ?positionOrder .
-        FILTER(?positionOrder IN(1, 2, 3))
-        }
+            :result_positionOrder ?positionOrder .
+        FILTER(?positionOrder IN (1, 2, 3))
     }
+}

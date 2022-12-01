@@ -1,5 +1,4 @@
-#Query 18
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 18
 
 SELECT ?forename ?surname
 WHERE {

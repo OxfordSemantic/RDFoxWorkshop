@@ -1,5 +1,4 @@
-#Query 16
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 16
 
 SELECT ?forename ?surname ?count
 WHERE {

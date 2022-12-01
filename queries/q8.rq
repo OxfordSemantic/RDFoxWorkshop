@@ -1,11 +1,10 @@
-#Query 8
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 8
 
 # Number of races per driver, ordered
 SELECT ?driver (COUNT(?race) AS ?raceCount)
 WHERE {
   ?result :result_driver ?driver ;
-          :result_race ?race .
+    :result_race ?race .
 }
 GROUP BY ?driver
 ORDER BY DESC(?raceCount)

@@ -1,7 +1,4 @@
-#Query 0
-PREFIX : <https://rdfox.com/examples/f1/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
+# Query 0
 SELECT ?S ?P ?O
 WHERE {
   ?S ?P ?O
@@ -49,6 +46,7 @@ WHERE {
   :circuit_country,
   :circuit_location,
   :circuit_name,
-  :circuit_circuitId)
+  :circuit_circuitId
+    )
   )
-} 
+}

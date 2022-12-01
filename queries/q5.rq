@@ -1,10 +1,9 @@
-#Query 5
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 5
 
 # What are the names of my drivers?
 SELECT DISTINCT ?driver ?forename ?surname
 WHERE {
   ?driver a :driver ;
-          :driver_forename ?forename ;
-          :driver_surname ?surname .
+    :driver_forename ?forename ;
+    :driver_surname ?surname .
 }

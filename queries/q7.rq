@@ -1,14 +1,12 @@
-#Query 7
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 7
 
-# Number of races Lewis Hamilton raced
+# Number of races Lewis Hamilton has raced in
 SELECT (COUNT(?race) AS ?raceCount)
 WHERE {
   
   ?driver :driver_forename "Lewis" ;
-          :driver_surname "Hamilton" .
+    :driver_surname "Hamilton" .
           
   ?result :result_driver ?driver ;
-          :result_race ?race .
-
+    :result_race ?race .
 }

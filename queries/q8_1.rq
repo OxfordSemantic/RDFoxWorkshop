@@ -1,5 +1,4 @@
-#Query 8, Bonus 1
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 8, Bonus 1
 
 # Number of races per driver, ordered
 SELECT ?forename ?surname (COUNT(?race) AS ?raceCount)

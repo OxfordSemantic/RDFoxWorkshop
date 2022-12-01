@@ -1,9 +1,8 @@
-#Query 4
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 4
 
 # What edges are there specifically for drivers?
-SELECT DISTINCT ?p
+SELECT DISTINCT ?P
 WHERE {
   ?S a :driver ;
-    ?p ?o .
+    ?P ?O .
 }

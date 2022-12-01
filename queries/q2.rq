@@ -1,7 +1,6 @@
-#Query 2
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 2
 
-# What kinds of edges are in the data
+# What kinds of edges are in the data?
 SELECT DISTINCT ?P
 WHERE {
   ?S ?P ?O

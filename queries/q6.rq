@@ -1,11 +1,10 @@
-#Query 6
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 6
 
-# Can you return everything about a specific driver, say Lewis Hamilton?
+# Can you return everything about a specific driver, say, Lewis Hamilton?
 SELECT ?driver ?p ?o
 WHERE {
   ?driver a :driver ;
-          :driver_forename "Lewis" ;
-          :driver_surname "Hamilton" ;
-          ?p ?o .
+    :driver_forename "Lewis" ;
+    :driver_surname "Hamilton" ;
+    ?p ?o .
 }

@@ -1,5 +1,4 @@
-#Query 18, Bonus
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 18, Bonus
 
 SELECT ?p ?o
 WHERE {

@@ -1,5 +1,4 @@
-#Query 3
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 3
 
 # What classes of nodes are there in the data?
 SELECT DISTINCT ?type

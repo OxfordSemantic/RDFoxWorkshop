@@ -1,5 +1,4 @@
-#Query 19
-PREFIX : <https://rdfox.com/examples/f1/>
+# Query 19
 
 SELECT ?forename ?surname ?percentage
 WHERE {

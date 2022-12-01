@@ -2,7 +2,7 @@ dstore create f1
 
 active f1
 
-import ./data/data.ttl
+import data/upTo2020.ttl
 
 set output out
 

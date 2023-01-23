@@ -6,3 +6,9 @@ Transformation
 .DS_Store
 RDFox-*
 *.lic
+axioms/axioms-old.ttl
+data/old/2021-22.ttl
+data/old/2021-22.ttl.zip
+data/old/data.ttl
+data/old/upTo2020.ttl
+data/old/upTo2020.ttl.zip

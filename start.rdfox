@@ -1,0 +1,23 @@
+dstore create f1
+
+active f1
+
+import +p data/upTo2020.ttl
+
+set output out
+
+endpoint start
+
+# Add the axioms with:
+# import > :myAxioms axioms/axioms.ttl
+# importaxioms :myAxioms
+
+# Remove the axioms with:
+# importaxioms :myAxioms -
+# update ! clear graph :myAxioms
+
+# Add rules with:
+# import rules/r1.dlog
+
+# Add the latest data with:
+# import data/21-23.ttl
